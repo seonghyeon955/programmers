@@ -1,0 +1,38 @@
+https://programmers.co.kr/learn/courses/30/lessons/59413
+ANIMAL_OUTS 테이블은 동물 보호소에서 입양 보낸 동물의 정보를 담은 테이블입니다. ANIMAL_OUTS 테이블 구조는 다음과 같으며, ANIMAL_ID, ANIMAL_TYPE, DATETIME, NAME, SEX_UPON_OUTCOME는 각각 동물의 아이디, 생물 종, 입양일, 이름, 성별 및 중성화 여부를 나타냅니다.
+
+NAME	TYPE	NULLABLE
+ANIMAL_ID	VARCHAR(N)	FALSE
+ANIMAL_TYPE	VARCHAR(N)	FALSE
+DATETIME	DATETIME	FALSE
+NAME	VARCHAR(N)	TRUE
+SEX_UPON_OUTCOME	VARCHAR(N)	FALSE
+보호소에서는 몇 시에 입양이 가장 활발하게 일어나는지 알아보려 합니다. 0시부터 23시까지, 각 시간대별로 입양이 몇 건이나 발생했는지 조회하는 SQL문을 작성해주세요. 
+이때 결과는 시간대 순으로 정렬해야 합니다.
+
+답 : 
+SET @HOUR_LIST = -1;
+SELECT 
+(@HOUR_LIST := @HOUR_LIST+1) AS 'HOUR',
+(SELECT COUNT(*) FROM ANIMAL_OUTS WHERE HOUR(DATETIME) = @HOUR_LIST) AS 'COUNT'
+FROM ANIMAL_OUTS
+WHERE @HOUR_LIST < 23;
+
+*** 0~23시까지의 모든 HOUR 출력을 위해 변수를 사용한다.
+MySQL 변수 선언 방법
+: SET@변수명='값';  - '='  MySQL에서 대입연산자, 비교연산자로 사용됨. SET명령어에서만 대입연산자로 인식
+  SET@변수명:='값'; - ':='
+  
+  SET을 제외한 다른 쿼리문(SELECT등)은 '='를 비교연산자로 인식, SET이 아닌 쿼리문에서는 반드시 대입 연산자인 ':='를 사용하도록 한다.
+  
+ 해결방법
+ 
+  SET으로 HOUR_LIST라는 변수를 선언, +1를 하며 0~23시까지 모든 시간에 대한 COUNT를 출력한다.
+  
+  SET @HOUR_LIST = -1; : HOUR_LIST변수선언, 0부터 세야 하므로 -1로 선언해준다.
+  SELECT
+  (@HOUR_LIST := @HOUR_LIST +1) AS 'HOUR', : -1+1을 함으로써 0시부터 카운트가 가능해진다 
+  (SELECT COUNT(*) FROM ANIMAL_OUTS WHERE HOUR(DATETIME) = @HOUR_LIST) AS 'COUNT') : 시간이 @HOUR_LIST일때만 카운트를 가능하도록 한다(결국 전체 0~24까지의 시간이 모두 카운트됨)
+  FROM ANIMAL_OUT
+  WHERE @HOUR_LIST<23 : 24시까지 카운트 해야하므로
+  
