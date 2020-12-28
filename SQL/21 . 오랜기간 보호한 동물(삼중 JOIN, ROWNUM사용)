@@ -55,6 +55,7 @@ Benji	2016-04-19 13:28:00
 이때 결과는 보호 시작일 순으로 조회해야 합니다.
 ※ 입양을 가지 못한 동물이 3마리 이상인 경우만 입력으로 주어집니다.
 
+[Oracle]
 SELECT NAME, DATETIME
 FROM 
 (SELECT NAME, DATETIME 
