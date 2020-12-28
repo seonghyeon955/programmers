@@ -11,6 +11,10 @@ SEX_UPON_OUTCOME	VARCHAR(N)	FALSE
 이때 결과는 시간대 순으로 정렬해야 합니다.
 
 답 : 
+
+
+[MySQL]
+
 SET @HOUR_LIST = -1;
 SELECT 
 (@HOUR_LIST := @HOUR_LIST+1) AS 'HOUR',
