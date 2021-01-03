@@ -26,18 +26,23 @@ answers	return
 입출력 예 #2
 
 모든 사람이 2문제씩을 맞췄습니다.
+
+
 Solution.java
-1
+
 class Solution {
-2
+
     public int[] solution(int[] answers) {
-3
+
         int[] answer = {};
-4
+
         return answer;
-5
+
     }
-6
+
 }
-실행 결과
-실행 결과가 여기에 표시됩니다.
+
+
+풀이)
+
+
