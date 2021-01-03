@@ -28,21 +28,53 @@ answers	return
 모든 사람이 2문제씩을 맞췄습니다.
 
 
-Solution.java
+풀이)
 
 class Solution {
 
     public int[] solution(int[] answers) {
 
-        int[] answer = {};
-
+        int[] cnt = new int[3];//수포자 수 
+        
+        //각 수포자들이 찍는 방식
+        int[] st1 = {1,2,3,4,5}; //5개
+        int[] st2 = {2,1,2,3,2,4,2,5}; //8개
+        int[] st3 = {3,3,1,1,2,2,4,4,5,5};//10개
+        
+        for(int i=0; i<answers.length; i++){
+            if(answers[i]== st1[i%5]){
+                cnt[0]++;
+            }
+            if(answers[i] == st2[i%8]){
+                cnt[1]++;
+            }
+            if(answers[i] == st3[i%10]){
+                cnt[2]++;
+            }
+        }
+        
+        int winner = cnt[0]; //찍어서 가장 많이 맞춘 사람
+        for(int i=0; i<cnt.length; i++){
+            if(winner<cnt[i]){
+                winner = cnt[i];
+            }
+        }
+        
+        List<Integer> win = new ArrayList<>(); //찍어서 많이 맞춘 사람의 리스트
+        for(int i=0; i<cnt.length; i++){
+            if(winner == cnt[i]) 
+                win.add(i); 
+        }
+        
+        int answer[] = {};
+        for(int i=0; i<win.size; i++){
+            answer[i] = win.get(i)+1;// 인덱스 이므로 +1 해줄것
+        }
         return answer;
-
     }
-
 }
 
 
-풀이)
+
 
 
