@@ -30,19 +30,17 @@ answers	return
 
 풀이)
 
-class Solution {
+import java.util.*;
 
+public class Solution {
     public int[] solution(int[] answers) {
-
-        int[] cnt = new int[3];//수포자 수 
-        
-        //각 수포자들이 찍는 방식
-        int[] st1 = {1,2,3,4,5}; //5개
-        int[] st2 = {2,1,2,3,2,4,2,5}; //8개
-        int[] st3 = {3,3,1,1,2,2,4,4,5,5};//10개
+        int[] st1 ={1,2,3,4,5};
+        int[] st2 ={2,1,2,3,2,4,2,5} ;
+        int[] st3 ={3,3,1,1,2,2,4,4,5,5};
+        int[] cnt = new int[3]; //3명의 학생->정답체크 위함
         
         for(int i=0; i<answers.length; i++){
-            if(answers[i]== st1[i%5]){
+            if(answers[i] == st1[i%5]){
                 cnt[0]++;
             }
             if(answers[i] == st2[i%8]){
@@ -53,28 +51,25 @@ class Solution {
             }
         }
         
-        int winner = cnt[0]; //찍어서 가장 많이 맞춘 사람
+        int winner = cnt[0];
         for(int i=0; i<cnt.length; i++){
-            if(winner<cnt[i]){
-                winner = cnt[i];
+            if(cnt[i]>winner){
+                winner = cnt[i];//가장 높은 점수를 받은 사람
             }
         }
         
-        List<Integer> win = new ArrayList<>(); //찍어서 많이 맞춘 사람의 리스트
+        List<Integer> win = new ArrayList<>(); //가장 높은 점수 받은 학생 리스트
         for(int i=0; i<cnt.length; i++){
-            if(winner == cnt[i]) 
-                win.add(i); 
+            if(cnt[i] == winner){
+                win.add(i);
+            }
+        }
+        int answer[] ={};
+        answer = new int[win.size()];//가장높은 점수받은 학생리스트 크기와 동일
+        for(int i=0; i<win.size(); i++){
+            answer[i] = win.get(i)+1;
         }
         
-        int answer[] = {};
-        for(int i=0; i<win.size; i++){
-            answer[i] = win.get(i)+1;// 인덱스 이므로 +1 해줄것
-        }
         return answer;
     }
 }
-
-
-
-
-
