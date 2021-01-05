@@ -23,4 +23,25 @@ array	commands	return
 
 풀이)
 
+import java.util.Arrays;
+
+public class Main{
+  public int Solution(int[] array, int[][]commands){
+    int[] answer = new int[commands.length];
+   
+    //array[] : 숫자가 들어있는 배열, answer[] : commands에 따라 배열을 자르고 정렬했을때 나오는 k번째 수만 모은 배열
+    for(int i=0; i<commands.length ; i++){
+      int temp[] = Arrays.outOfRange(array, commands[i][0]-1, commands[i][1]); //commands에 따라 자른 배열. 
+      //ommands[i][0]-1의 이유 : 0부터 시작하는 인덱스와 달리 셀때는 1부터 세기 시작했으므로 commands[i][0]의 값보다 -1을 해줌으로써 맞게 세었으므로 뒤의 commands[i][1]은 -1을 해줄 필요가 없다.
+      int temp[] = Arrays.outOfRange(array, commands[i][0]-1, commands[i][1]); //commands에 따라 자른 배열
+      Arrays.sort(temp); //정렬
+      answer[i]= temp[commands[i][2]-1];//temp배열에서 commands[i][2]-1의 값(k) 번째 원소를 찾아 배열 answer에 넣기
+      
+    }
+    return answer;
+  }
+    
+  
+}
+
 
