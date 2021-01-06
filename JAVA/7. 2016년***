@@ -20,3 +20,23 @@ class Solution {
 
 풀이)
 
+public class Main{
+    public String Solution(iny a, int b){
+        //a: 월, b:일
+        String[]day ={"SUN","MON","TUE","WED","THU","FRI","SAT"};
+        String[]year =new String[366]; //윤년 이므로
+        int[]month = {31,29,31,30,31,30,31,31,30,31,30,31};
+        int wantDay = 0;
+        
+        String answer= "";
+        for(int i=0; i<year.length; i++){ //각 날짜에 따른 요일찾기 
+            year[i] = day[(i+5)%7]; //시작(1/1)이 일요일이 아닌 금요일 이므로
+        }
+        for(int i=0; i<a-1 ; i++){ //열두달
+            wantDay += month[i];
+        }
+        wantDay += b-1; //1월1일은 테스트 완료 -> 즉, 하루가 이미 지난 상태이므로 -1.
+        answer = year[wantDay]; 
+        return answer;
+    }
+}
